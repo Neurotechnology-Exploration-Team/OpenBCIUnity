@@ -4,16 +4,16 @@ Everything you need to transform your game into an OpenBCI compatible masterpiec
 Feel free to fork, clone, change, or use any of the code in this bundle however you wish. It is intended for educational purposes.
 
 ## Table of Contents
-1. [Prerequisites](#1.-prerequisites)
-2. [Install brainflow](#2.-install-brainflow)
+1. [Prerequisites](#1-prerequisites)
+2. [Install brainflow](#2-install-brainflow)
    - [Install NuGet for Unity](#install-nuget-for-unity)
    - [Install brainflow NuGet package](#install-brainflow-nuget-package)
-3. [Add required assets](#3.-add-required-assets)
-4. [Add the .gitignore](#4.-add-the-.gitignore)
-5. [Fixing errors](#5.-fixing-errors)
-6. [Creating required GameObjects](#6.-creating-required-gameobjects)
-7. [Creating optional GameObjects](#7.-creating-optional-gameobjects)
-8. [Using OpenBCIReader in your own code](#8.-using-openbcireader-in-your-own-code)
+3. [Add required assets](#3-add-required-assets)
+4. [Add the .gitignore](#4-add-the-.gitignore)
+5. [Fixing errors](#5-fixing-errors)
+6. [Creating required GameObjects](#6-creating-required-gameobjects)
+7. [Creating optional GameObjects](#7-creating-optional-gameobjects)
+8. [Using OpenBCIReader in your own code](#8-using-openbcireader-in-your-own-code)
 
 ## 1. Prerequisites
 
