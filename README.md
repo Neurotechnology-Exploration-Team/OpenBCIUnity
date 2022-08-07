@@ -9,7 +9,7 @@ Feel free to fork, clone, change, or use any of the code in this bundle however 
    - [Install NuGet for Unity](#install-nuget-for-unity)
    - [Install brainflow NuGet package](#install-brainflow-nuget-package)
 3. [Add required assets](#3-add-required-assets)
-4. [Add the .gitignore](#4-add-the-.gitignore)
+4. [Add the .gitignore](#4-add-the-gitignore)
 5. [Fixing errors](#5-fixing-errors)
 6. [Creating required GameObjects](#6-creating-required-gameobjects)
 7. [Creating optional GameObjects](#7-creating-optional-gameobjects)
