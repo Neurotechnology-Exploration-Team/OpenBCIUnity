@@ -87,6 +87,7 @@ You now have everything you need to use OpenBCI in your project! If you have bee
 1. Create a new Cube or other solid object in the scene
 2. Add InputHandler.cs and TopDownCarController.cs from the ZIP file
 3. Click the GameObject and set the OpenBCIReaderI variable to your bciReader, and the BCIMenuI variable to your BCI Menu Canvas object
+4. Click play; you can set the keybinds using the dropdown next to inputs, and if you're using OpenBCIReaderDummy, click on your bciReader object and use the checkboxes to simulate input. Hit Escape to close the menu and resume the game.
 
 ## 8. Using OpenBCIReader in your own code
 
