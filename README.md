@@ -21,7 +21,7 @@ You must have an existing Unity project. This guide has been tested in Unity 202
 
 Download the resources for this guide using the green Code -> Download ZIP button
 
-## 2. Install brianflow
+## 2. Install brainflow
 
 ### Install NuGet for Unity
 
