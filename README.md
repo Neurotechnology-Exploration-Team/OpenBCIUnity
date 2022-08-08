@@ -17,45 +17,51 @@ Feel free to fork, clone, change, or use any of the code in this bundle however 
 
 ## 1. Prerequisites
 
-You must have an existing Unity project. This guide has been tested in Unity 2020.3.37f1.
+You must have an existing Unity project. This guide has been tested in Unity 2020.3.37f1 on a blank 3D project.
 
 Download the resources for this guide using the green Code -> Download ZIP button
 
-## 2. Install brainflow
+## 2. Install brainflow and 2D Sprites dependencies
 
 ### Install NuGet for Unity
 
 1. Download the latest NuGet Unity package from [NuGetForUnity](https://github.com/GlitchEnzo/NuGetForUnity/releases)
    - Click on NuGetForUnity.x.x.x.unitypackage under Assets in the latest release
+   - This guide has been tested with release 3.0.5
 2. Install in Unity editor
    - Open your Unity project
    - Go to Assets/Import Package/Custom Package...
    - Select the file from [NuGetForUnity](https://github.com/GlitchEnzo/NuGetForUnity/releases) then click Import
-   - Use the default selection
+   - Use the default import selection
 
 ### Install brainflow NuGet package
 
 1. In the Unity editor, go to NuGet/Manage NuGet Packages
 2. Search for brainflow (look for author Andrey1994) and click Install
+   - This guide has been tested with brainflow version 5.1.1
 3. Close NuGet window
+
+### Install 2D sprites and other packages needed for UI
+
+1. In the Unity editor, go to Window/Package Manager
+2. Switch the second dropdown on the top left from Packages: In Project to Packages: Unity Registry
+3. Select "2D," which should have 7 packages including 2D Sprite
+4. Click Install at the bottom right
+5. Close the Package Manager when it is finished
 
 
 ## 3. Add required assets
 
-1. Make a Scripts folder and a Prefabs folder in your project if you have not already
-2. Copy the following scripts from the zip folder to your Scripts folder:
-   - BCIMenu.cs
-   - BCIMenuChannel.cs
-   - BCIMenuI.cs
-   - OpenBCIReaderDummy.cs
-   - OpenBCIReaderI.cs
-3. Copy the following prefabs from the zip folder to your Prefabs folder:
-   - BCI Menu Canvas.prefab
-   - Channel.prefab
+1. Install our provided Unity package
+   - Go to Assets/Import Package/Custom Package...
+   - Select the openbcireadervx.x.x.unitypackage from this repository
+   - Use the default imports
 
 ## 4. Add the .gitignore
 
-1. Copy the .gitignore file from the zip folder to the top level of your Unity project
+1. Go to the top level Assets folder in your project
+2. Right click in the project files window and select "Show in Explorer" or a similar option to view the folder in your system file explorer
+3. Copy the .gitignore file from the zip folder to the top level of your Unity project using your system file explorer
 
 ## 5. Fixing errors
 
@@ -72,9 +78,13 @@ Download the resources for this guide using the green Code -> Download ZIP butto
 ## 6. Creating required GameObjects
 
 1. Create an empty GameObject, optionally called bciReader
-2. Attach the OpenBCIReaderDummy.cs script to the new GameObject
-3. Create a new object using the BCI Menu Canvas prefab
-4. Click the BCI Menu Canvas object; in the inspector, set the OpenBCIReaderI variable to your bciReader object
+2. Attach the OpenBCIReaderDummy.cs script from the imported Scripts folder to the new GameObject
+3. Create a new object using the BCI Menu Canvas prefab inside the imported Prefabs folder
+4. If prompted to import TMP Essentails, click "Import TMP Essentails" and wait for the import to finish, then close the TMP Importer
+5. Click the BCI Menu Canvas object; in the inspector, set the BCI Reader Object variable to your bciReader object
+6. Switch to the Game tab from the Scene tab
+7. Select "16:9 Aspect" instead of "Free Aspect" from the resolution dropdown
+8. Click play to test the menu
 
 ---
 
@@ -82,12 +92,9 @@ You now have everything you need to use OpenBCI in your project! If you have bee
 
 ---
 
-## 7. Creating optional GameObjects
+## 7. Creating optional GameObjects (documentation still in progress)
 
 1. Create a new Cube or other solid object in the scene
-2. Add InputHandler.cs and TopDownCarController.cs from the ZIP file
-3. Click the GameObject and set the OpenBCIReaderI variable to your bciReader, and the BCIMenuI variable to your BCI Menu Canvas object
-4. Click play; you can set the keybinds using the dropdown next to inputs, and if you're using OpenBCIReaderDummy, click on your bciReader object and use the checkboxes to simulate input. Hit Escape to close the menu and resume the game.
 
 ## 8. Using OpenBCIReader in your own code
 
