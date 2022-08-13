@@ -13,8 +13,7 @@ Feel free to fork, clone, change, or use any of the code in this bundle however 
 4. [Add the .gitignore](#4-add-the-gitignore)
 5. [Fixing errors](#5-fixing-errors)
 6. [Creating required GameObjects](#6-creating-required-gameobjects)
-7. [Creating optional GameObjects](#7-creating-optional-gameobjects)
-8. [Using OpenBCIReader in your own code](#8-using-openbcireader-in-your-own-code)
+7. [Using OpenBCIReader in your own code](#7-using-openbcireader-in-your-own-code)
 
 ## 1. Prerequisites
 
@@ -88,16 +87,6 @@ Download the resources for this guide using the green Code -> Download ZIP butto
 8. Select "16:9 Aspect" instead of "Free Aspect" from the resolution dropdown
 9. Click play to test the menu
 
----
+## 7. Using OpenBCIReader in your own code
 
-You now have everything you need to use OpenBCI in your project! If you have been working on a new project and want to test it out, follow step 7. If you have an existing project that you are adding OpenBCI functionality to, use the example files from step 7 and the additional notes in step 8 to continue.
-
----
-
-## 7. Creating optional GameObjects (documentation still in progress)
-
-1. Create a new Cube or other solid object in the scene
-
-## 8. Using OpenBCIReader in your own code
-
-OpenBCIReaderI and BCIMenuI provide documentation for all the methods available to you. For the vast majority of games, you will only need the code that InputHandler.cs uses. Provide the Menu with possible keybinds (such as left, right, shoot, jump, etc.) using bciMenu.SetKeybindNames with a List<string>. Then, use bciMenu.GetInputForKeybind with one of those strings to know whether or not the user is flexing the muscle that they have set to that keybind.
+OpenBCIReaderI and BCIMenuI provide documentation for all the methods available to you. For the vast majority of games, you will only need to provide the Menu with possible keybinds (such as left, right, shoot, jump, etc.) using bciMenu.SetKeybindNames with a List<string> and use bciMenu.GetInputForKeybind with one of those strings to know whether or not the user is flexing the muscle that they have set to that keybind.
