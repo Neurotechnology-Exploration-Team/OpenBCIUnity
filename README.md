@@ -83,9 +83,10 @@ Download the resources for this guide using the green Code -> Download ZIP butto
 3. Create a new object using the BCI Menu Canvas prefab inside the imported Prefabs folder
 4. If prompted to import TMP Essentails, click "Import TMP Essentails" and wait for the import to finish, then close the TMP Importer
 5. Click the BCI Menu Canvas object; in the inspector, set the BCI Reader Object variable to your bciReader object
-6. Switch to the Game tab from the Scene tab
-7. Select "16:9 Aspect" instead of "Free Aspect" from the resolution dropdown
-8. Click play to test the menu
+6. Add an EventSystem game object; Right click in the hierarchy, then select UI / Event System
+7. Switch to the Game tab from the Scene tab
+8. Select "16:9 Aspect" instead of "Free Aspect" from the resolution dropdown
+9. Click play to test the menu
 
 ---
 
