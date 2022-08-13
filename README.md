@@ -68,7 +68,7 @@ Download the resources for this guide using the green Code -> Download ZIP butto
 
 1. If you get the error: "Assets\Scripts\OpenBCIReaderDummy.cs(6,7): error CS0246: The type or namespace name 'brainflow' could not be found (are you missing a using directive or an assembly reference?)"
    - Create a folder called net45 inside Assets\Packages\brainflow.x.x.x\lib in your Unity project
-   - Copy [brainflow.dll](https://github.com/Neurotechnology-Exploration-Team/OpenBCIUnity/blob/main/brainflow.dll) to Assets\Packages\brainflow.x.x.x\lib\net45
+   - Copy brainflow.dll from the zip folder to Assets\Packages\brainflow.x.x.x\lib\net45
 2. If you get the error: "Failed to load 'Assets/Packages/brainflow.4.9.0/lib/BoardController32.dll', expected x64 architecture, but was x86 architecture. You must recompile your plugin for x64 architecture."
    - First, try reopening the Unity project
    - If that doesn't work:
