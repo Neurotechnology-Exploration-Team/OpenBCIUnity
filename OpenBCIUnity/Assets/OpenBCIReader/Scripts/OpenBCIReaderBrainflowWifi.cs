@@ -61,7 +61,7 @@ public class OpenBCIReaderBrainflowWifi : MonoBehaviour, OpenBCIReaderI
     // /// <summary>
     // /// Variable that represents the current board connection
     // /// </summary>
-    // private BoardShim boardShim;
+    private BoardShim boardShim;
 
     /// <summary>
     /// Number of channels in the BCI device, usually determined by boardShim
@@ -105,6 +105,14 @@ public class OpenBCIReaderBrainflowWifi : MonoBehaviour, OpenBCIReaderI
     /// </summary>
     /// <see cref="lastVal"/>
     private DateTime lastValTime = DateTime.UtcNow;
+
+    public enum PossibleBoardID
+    {
+        WifiCyton = WifiCytonBoardID,
+        Synthetic = BoardIds.SYNTHETIC_BOARD
+    }
+
+    public PossibleBoardID boardID = PossibleBoardID.WifiCyton;
 
     /// <summary>
     /// Called before the first frame update.
@@ -258,9 +266,24 @@ public class OpenBCIReaderBrainflowWifi : MonoBehaviour, OpenBCIReaderI
         
         try
         {
-            if (false) throw new Exception("BOARD_WRITE_ERROR:4");
+            BrainFlowInputParams inputParams = new BrainFlowInputParams
+            {
+                ip_address = "192.168.4.1",
+                ip_port = emptyPort
+            };
+
+            Debug.Log("Attempting to connect to boardId " + WifiCytonBoardID); // (int) boardID
             
-            Thread.Sleep(10_000);
+            boardShim = new BoardShim (WifiCytonBoardID, inputParams);
+            boardShim.prepare_session ();
+            boardShim.start_stream (450000, "file://file_stream.csv:w");
+
+            Thread.Sleep (5000);
+            boardShim.stop_stream ();
+            boardShim.release_session();
+            // if (false) throw new Exception("BOARD_WRITE_ERROR:4");
+            //
+            // Thread.Sleep(10_000);
 
             Debug.Log("OpenBCI initialization complete on wifi");
             return true;
@@ -288,7 +311,7 @@ public class OpenBCIReaderBrainflowWifi : MonoBehaviour, OpenBCIReaderI
         }
         try
         {
-            if (false) throw new Exception("BOARD_NOT_CREATED_ERROR:15");
+            if (false) return boardShim.get_current_board_data(thresholdSensitivities.Max());
             
             Random r = new Random();
             double[,] rawData = new double[numChannels, thresholdSensitivities.Max()];
