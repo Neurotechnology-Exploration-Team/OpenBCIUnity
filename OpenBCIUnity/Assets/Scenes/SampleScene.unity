@@ -559,7 +559,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1996671711}
-  - component: {fileID: 1996671710}
+  - component: {fileID: 1996671712}
   m_Layer: 0
   m_Name: bciReader
   m_TagString: Untagged
@@ -567,22 +567,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1996671710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1996671709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5af2d9f1c19bb8d41878dda64196b95d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  verbose: 0
-  attemptConnectionOnStartup: 0
-  allowWifi: 0
-  flexedChannels: 0000000000000000
 --- !u!4 &1996671711
 Transform:
   m_ObjectHideFlags: 0
@@ -598,3 +582,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1996671712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1996671709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e7bf793b55d13f4ca224ab4fa9c0e1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  verbose: 0
+  attemptConnectionOnStartup: 0
+  allowWifi: 0
+  flexedChannels: 0000000000000000
