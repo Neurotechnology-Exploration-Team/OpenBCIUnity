@@ -595,6 +595,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verbose: 0
-  attemptConnectionOnStartup: 0
-  allowWifi: 0
+  attemptConnectionOnStartup: 1
+  allowWifi: 1
   flexedChannels: 0000000000000000
