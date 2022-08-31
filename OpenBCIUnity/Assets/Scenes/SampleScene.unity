@@ -594,7 +594,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e7bf793b55d13f4ca224ab4fa9c0e1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verbose: 0
+  verbose: 1
   attemptConnectionOnStartup: 1
   allowWifi: 1
+  boardID: -1
   flexedChannels: 0000000000000000
