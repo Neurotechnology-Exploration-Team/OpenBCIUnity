@@ -17,7 +17,7 @@ Feel free to fork, clone, change, or use any of the code in this bundle however 
 
 ## 1. Prerequisites
 
-You must have an existing Unity project. This guide has been tested in Unity 2020.3.37f1 on a blank 3D project.
+You must have an existing Unity project. This guide has been tested in Unity 2020.3.37f1 and 2021.3.8f1 on a blank 3D project.
 
 Download the resources for this guide by clicking on the zip folder in the latest release on the [Releases](https://github.com/Neurotechnology-Exploration-Team/OpenBCIUnity/releases) page and extracting it
 
