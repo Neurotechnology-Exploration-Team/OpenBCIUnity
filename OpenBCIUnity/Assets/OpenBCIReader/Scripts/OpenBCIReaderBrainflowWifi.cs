@@ -181,25 +181,25 @@ public class OpenBCIReaderBrainflowWifi : MonoBehaviour, OpenBCIReaderI
         // enable debug info
         BoardShim.enable_dev_board_logger();
         
-        if (verbose) Debug.Log("Attempting bluetooth connection...");
+        if (verbose) Debug.Log("Skipping to Wifi Connection...");
 
-        if (serialPort == null)
-        {
-            if (verbose) Debug.LogWarning("Warning: No serial port detected. Attempting to search for board...");
-            for (int i = 0; i < 10; i++)
-            {
-                if (AttemptConnectSerial("COM" + i))
-                {
-                    serialPort = "COM" + i;
-                    return true;
-                }
-            }
-        }
-        else
-        {
-            AttemptConnectSerial(serialPort);
-        }
-
+        // if (serialPort == null)
+        // {
+        //     if (verbose) Debug.LogWarning("Warning: No serial port detected. Attempting to search for board...");
+        //     for (int i = 0; i < 10; i++)
+        //     {
+        //         if (AttemptConnectSerial("COM" + i))
+        //         {
+        //             serialPort = "COM" + i;
+        //             return true;
+        //         }
+        //     }
+        // }
+        // else
+        // {
+        //     AttemptConnectSerial(serialPort);
+        // }
+        
         if (connectionStatus != OpenBCIReaderI.ConnectionStatus.Disconnected) return true;
         if (allowWifi) return AttemptConnectWifi(4000);
         if (verbose) Debug.Log("Wifi not allowed.");
