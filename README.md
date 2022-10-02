@@ -5,10 +5,7 @@ Feel free to fork, clone, change, or use any of the code in this bundle however 
 
 ## Table of Contents
 1. [Prerequisites](#1-prerequisites)
-2. [Install brainflow and 2D Sprites dependencies](#2-install-brainflow-and-2d-sprites-dependencies)
-   - [Install NuGet for Unity](#install-nuget-for-unity)
-   - [Install brainflow NuGet package](#install-brainflow-nuget-package)
-   - [Install 2D sprites and other packages needed for UI](#install-2d-sprites-and-other-packages-needed-for-ui)
+2. [Install 2D Sprites dependencies](#2-install-2d-sprites-dependencies)
 3. [Add required assets](#3-add-required-assets)
 4. [Add the .gitignore](#4-add-the-gitignore)
 5. [Fixing errors](#5-fixing-errors)
@@ -17,31 +14,11 @@ Feel free to fork, clone, change, or use any of the code in this bundle however 
 
 ## 1. Prerequisites
 
-You must have an existing Unity project. This guide has been tested in Unity 2020.3.37f1 and 2021.3.8f1 on a blank 3D project.
+You must have an existing Unity project. This guide has been tested in Unity 2020.3.37f1, 2021.3.8f1, and 2021.3.6f1 on a blank 3D project.
 
 Download the resources for this guide by clicking on the zip folder in the latest release on the [Releases](https://github.com/Neurotechnology-Exploration-Team/OpenBCIUnity/releases) page and extracting it
 
-## 2. Install brainflow and 2D Sprites dependencies
-
-### Install NuGet for Unity
-
-1. Download the latest NuGet Unity package from [NuGetForUnity](https://github.com/GlitchEnzo/NuGetForUnity/releases)
-   - Click on NuGetForUnity.x.x.x.unitypackage under Assets in the latest release
-   - This guide has been tested with release 3.0.5
-2. Install in Unity editor
-   - Open your Unity project
-   - Go to Assets/Import Package/Custom Package...
-   - Select the file from [NuGetForUnity](https://github.com/GlitchEnzo/NuGetForUnity/releases) then click Import
-   - Use the default import selection
-
-### Install brainflow NuGet package
-
-1. In the Unity editor, go to NuGet/Manage NuGet Packages
-2. Search for brainflow (look for author Andrey1994) and click Install
-   - This guide has been tested with brainflow version 5.1.1
-3. Close NuGet window
-
-### Install 2D sprites and other packages needed for UI
+## 2. Install 2D Sprites dependencies
 
 1. In the Unity editor, go to Window/Package Manager
 2. Switch the second dropdown on the top left from Packages: In Project to Packages: Unity Registry
@@ -49,10 +26,10 @@ Download the resources for this guide by clicking on the zip folder in the lates
 4. Click Install at the bottom right
 5. Close the Package Manager when it is finished
 
-
 ## 3. Add required assets
 
 1. Install our provided Unity package
+   - Open your Assets folder in the project window
    - Go to Assets/Import Package/Custom Package...
    - Select the openbcireadervx.x.x.unitypackage from this repository
    - Use the default imports
@@ -74,6 +51,10 @@ Download the resources for this guide by clicking on the zip folder in the lates
      - Find Assets\Packages\brainflow.x.x.x\lib\BoardController32.dll and click it to open it in the Unity inspector
      - In the properties window, on the left tab, under CPU, select "x86"
      - In the properties window, on the right tab, select ONLY the "x86" checkbox
+3. If you aren't on Windows, you may have other issues with brainflow's "GENERAL_ERROR"s or compilation issues
+   - Find the OpenBCIReader/brainflow folder
+   - Delete everything from that folder
+   - Follow Unity instructions from [this page](https://brainflow.readthedocs.io/en/stable/GameEngines.html) but place all files into the OpenBCIUnity/brainflow folder
 
 ## 6. Creating required GameObjects
 
