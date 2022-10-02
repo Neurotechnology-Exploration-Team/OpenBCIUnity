@@ -322,10 +322,17 @@ public class BCIMenu : MonoBehaviour, BCIMenuI
 
     public void Auto()
     {
-        bciReader.AutoRestingThreshold();
-        for (int i = 0; i < channels.Length; i++)
+        if (bciReader.GetConnectionStatus() != OpenBCIReaderI.ConnectionStatus.Connected)
         {
-            channels[i].barMax = bciReader.GetThreshold(i) * 3;
+            Debug.Log("Attempted to Auto() while board was not connected.");
+        }
+        else
+        {
+            bciReader.AutoRestingThreshold();
+            for (int i = 0; i < channels.Length; i++)
+            {
+                channels[i].barMax = bciReader.GetThreshold(i) * 3;
+            }
         }
     }
 }
