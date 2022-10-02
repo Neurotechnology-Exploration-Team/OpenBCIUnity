@@ -185,7 +185,7 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
     {
         // enable debug info
         BoardShim.enable_dev_board_logger();
-        if (verbose) BoardShim.set_log_file("brainflow_log.txt");
+        if (verbose) BoardShim.set_log_file("Logs/brainflow_log.txt");
 
         switch (boardType)
         {
