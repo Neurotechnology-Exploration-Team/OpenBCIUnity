@@ -62,6 +62,8 @@ public class BCIMenu : MonoBehaviour, BCIMenuI
         ResetThresholdSliders();
         
         Pause();
+        
+        Board_Type();
     }
 
     // Update is called once per frame
@@ -248,7 +250,6 @@ public class BCIMenu : MonoBehaviour, BCIMenuI
                 bciReader.SetBoardType(OpenBCIReaderI.BoardType.WifiCyton);
                 break;
         }
-        bciReader.Reconnect();
     }
 
     public void WifiBoardName()
