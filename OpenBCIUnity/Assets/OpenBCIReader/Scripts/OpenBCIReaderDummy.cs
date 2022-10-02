@@ -400,6 +400,7 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
 
     public void SetBoardType(OpenBCIReaderI.BoardType boardType)
     {
+        Disconnect();
         if (verbose) Debug.Log("Setting boardType to " + boardType);
         this.boardType = boardType;
     }
