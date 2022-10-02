@@ -262,21 +262,9 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4365767844262938389, guid: ed926d4414ccc6d44bfb2283ff06921b, type: 3}
-      propertyPath: m_Options.m_Options.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4365767844262938389, guid: ed926d4414ccc6d44bfb2283ff06921b, type: 3}
-      propertyPath: m_Options.m_Options.Array.data[0].m_Text
+    - target: {fileID: 4365767843558917229, guid: ed926d4414ccc6d44bfb2283ff06921b, type: 3}
+      propertyPath: m_Text
       value: Syntheic
-      objectReference: {fileID: 0}
-    - target: {fileID: 4365767844262938389, guid: ed926d4414ccc6d44bfb2283ff06921b, type: 3}
-      propertyPath: m_Options.m_Options.Array.data[1].m_Text
-      value: Cyton
-      objectReference: {fileID: 0}
-    - target: {fileID: 4365767844262938389, guid: ed926d4414ccc6d44bfb2283ff06921b, type: 3}
-      propertyPath: m_Options.m_Options.Array.data[2].m_Text
-      value: Wifi Cyton
       objectReference: {fileID: 0}
     - target: {fileID: 4365767844328366615, guid: ed926d4414ccc6d44bfb2283ff06921b, type: 3}
       propertyPath: m_AnchorMax.x
@@ -595,9 +583,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5af2d9f1c19bb8d41878dda64196b95d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verbose: 0
+  verbose: 1
   attemptConnectionOnStartup: 0
-  allowWifi: 0
+  boardType: 0
   flexedChannels: 0000000000000000
 --- !u!4 &1996671711
 Transform:
