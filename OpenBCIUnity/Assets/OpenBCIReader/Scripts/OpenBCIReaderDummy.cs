@@ -261,8 +261,6 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
                 if (verbose) Debug.Log("Warning: Invalid board connection type '" + boardType + "'");
                 return false;
         }
-        
-        return false;
     }
 
     private bool AttemptConnectSerial(string attemptSerialPort)
