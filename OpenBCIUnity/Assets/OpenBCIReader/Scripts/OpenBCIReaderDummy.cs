@@ -111,6 +111,8 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
     /// <see cref="lastVal"/>
     private DateTime lastValTime = DateTime.UtcNow;
 
+    public bool doLastNotAvg;
+
     /// <summary>
     /// Called before the first frame update.
     /// Attempts to start the connection if attemptConnectionOnStartup
@@ -130,23 +132,25 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
     // Update is called once per frame
     private void Update()
     {
-        if (connectionStatus == OpenBCIReaderI.ConnectionStatus.Disconnected) return;
+        if (connectionStatus != OpenBCIReaderI.ConnectionStatus.Connected) return;
         
         var data = GetRawData();
-        for (int channel = 0; channel < numChannels && channel < data.GetLength(0); channel++)
+        for (int channel = 0; channel < numChannels; channel++)
         {
             double avg = 0;
             for (int sample = 0;
-                 sample < thresholdSensitivities[channel] && sample < data.GetLength(1);
+                 sample < thresholdSensitivities[channel] && sample < data.GetLength(1)  
+                                                          && channel < data.GetLength(0);
                  sample++)
             {
-                avg += data[channel, sample];
+                if (doLastNotAvg) avg = data[channel, sample];
+                else avg += data[channel, sample];
             }
 
-            avg /= thresholdSensitivities[channel];
+            if (!doLastNotAvg) avg /= thresholdSensitivities[channel];
             nanovoltAverages[channel] = avg;
         }
-        if (data == null || data.Length <= 0) return;
+        if (data == null || data.GetLength(0) <= 0 || data.GetLength(1) <= 0) return;
         switch (connectionStatus)
         {
             case OpenBCIReaderI.ConnectionStatus.Connecting when Math.Abs(data[0, 0] - lastVal) >= .01:

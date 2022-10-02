@@ -262,10 +262,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4365767843558917229, guid: ed926d4414ccc6d44bfb2283ff06921b, type: 3}
-      propertyPath: m_Text
-      value: Syntheic
-      objectReference: {fileID: 0}
     - target: {fileID: 4365767844328366615, guid: ed926d4414ccc6d44bfb2283ff06921b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -586,6 +582,7 @@ MonoBehaviour:
   verbose: 1
   attemptConnectionOnStartup: 0
   boardType: 0
+  doLastNotAvg: 1
   flexedChannels: 0000000000000000
 --- !u!4 &1996671711
 Transform:
