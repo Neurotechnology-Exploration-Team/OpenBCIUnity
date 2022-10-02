@@ -42,10 +42,10 @@ Download the resources for this guide by clicking on the zip folder in the lates
 
 ## 5. Fixing errors
 
-1. If you get the error: "Failed to load 'Assets/Packages/brainflow.4.9.0/lib/BoardController32.dll', expected x64 architecture, but was x86 architecture. You must recompile your plugin for x64 architecture."
+1. If you get the error: "Failed to load 'OpenBCIUnity/brainflow/BoardController32.dll', expected x64 architecture, but was x86 architecture. You must recompile your plugin for x64 architecture."
    - First, try reopening the Unity project
    - If that doesn't work:
-     - Find Assets\Packages\brainflow.x.x.x\lib\BoardController32.dll and click it to open it in the Unity inspector
+     - Find OpenBCIUnity/brainflow/BoardController32.dll and click it to open it in the Unity inspector
      - In the properties window, on the left tab, under CPU, select "x86"
      - In the properties window, on the right tab, select ONLY the "x86" checkbox
 2. If you aren't on Windows, you may have other issues with brainflow's "GENERAL_ERROR"s or compilation issues
