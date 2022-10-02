@@ -133,10 +133,12 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
         if (connectionStatus == OpenBCIReaderI.ConnectionStatus.Disconnected) return;
         
         var data = GetRawData();
-        for (int channel = 0; channel < numChannels; channel++)
+        for (int channel = 0; channel < numChannels && channel < data.GetLength(0); channel++)
         {
             double avg = 0;
-            for (int sample = 0; sample < thresholdSensitivities[channel]; sample++)
+            for (int sample = 0;
+                 sample < thresholdSensitivities[channel] && sample < data.GetLength(1);
+                 sample++)
             {
                 avg += data[channel, sample];
             }
@@ -345,17 +347,7 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
         }
         try
         {
-            if (false) throw new Exception("BOARD_NOT_CREATED_ERROR:15");
-            
-            Random r = new Random();
-            double[,] rawData = new double[numChannels, thresholdSensitivities.Max()];
-            for (int channel = 0; channel < numChannels; channel++)
-            {
-                for (int val = 0; val < thresholdSensitivities[0]; val++)
-                {
-                    rawData[channel, val] = r.NextDouble() * (flexedChannels[channel] ? 2 : 1);
-                }
-            }
+            double[,] rawData = boardShim.get_current_board_data(500);
 
             return rawData;
         }
