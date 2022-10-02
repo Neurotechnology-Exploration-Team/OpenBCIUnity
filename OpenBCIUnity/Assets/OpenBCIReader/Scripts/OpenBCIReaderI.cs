@@ -40,6 +40,21 @@ public interface OpenBCIReaderI
         /// </summary>
         Reconnecting
     }
+    public enum BoardType
+    {
+        /// <summary>
+        /// Randomly generated data
+        /// </summary>
+        Synthetic,
+        /// <summary>
+        /// Bluetooth over serial connection to an OpenBCI Cyton board
+        /// </summary>
+        BluetoothCyton,
+        /// <summary>
+        /// Wifi connection to an OpenBCI Cyton board with Wifi Shield
+        /// </summary>
+        WifiCyton
+    }
     /// <summary>
     /// Returns the current status of the connection with the Open BCI board
     /// </summary>
@@ -104,44 +119,30 @@ public interface OpenBCIReaderI
     public int? GetNumChannels();
 
     /// <summary>
-    /// Set whether or not the program should be allowed to use wifi to connect to the board.
-    ///
-    /// Note: turning this on may add a significant amount of time to reconnection delay
+    /// Set to which board type the reader should try to connect.
     /// </summary>
-    /// <param name="allowWifi">Whether or not the program should be allowed to use wifi to connect to the board.</param>
+    /// <param name="boardType">Which board type to use to read data.</param>
     /// <example>
     /// <code>
-    ///
     /// OpenBCIReaderI bci = ...;
     ///
-    /// if (usingWifiShield) {
-    ///     bci.SetAllowWifi(true);
-    /// } else {
-    ///     bci.SetAllowWifi(false);
-    /// }
-    ///
+    /// bci.SetBoardType(BoardType.Synthetic);
     /// </code>
     /// </example>
-    public void SetAllowWifi(bool allowWifi);
+    public void SetBoardType(BoardType boardType);
     /// <summary>
-    /// Get whether or not the program should be allowed to use wifi to connect to the board.
-    ///
-    /// Note: Enabling this on may add a significant amount of time to reconnection delay
+    /// Get which board type the reader should try to connect to.
     /// </summary>
-    /// <returns>Whether or not the program should be allowed to use wifi to connect to the board.</returns>
+    /// <returns>Which board type the reader is using to read data.</returns>
     ///
     /// <example>
     /// <code>
     /// OpenBCIReaderI bci = ...;
     ///
-    /// if (bci.GetAllowWifi()) {
-    ///     ...
-    /// } else {
-    ///     ...
-    /// }
+    /// BoardType type = bci.GetBoardType();
     /// </code>
     /// </example>
-    public bool GetAllowWifi();
+    public BoardType GetBoardType();
     /// <summary>
     /// Set the name of the wifi shield used with the board.
     /// Similar to a serial number, different for each board.
@@ -152,7 +153,7 @@ public interface OpenBCIReaderI
     /// <code>
     /// OpenBCIReaderI bci = ...;
     ///
-    /// bci.SetAllowWifi(true);
+    /// bci.SetBoardType(BoardType.WifiCyton);
     /// bci.SetWifiBoardName("OpenBCI-XXXX");
     /// bci.Reconnect();
     /// </code>

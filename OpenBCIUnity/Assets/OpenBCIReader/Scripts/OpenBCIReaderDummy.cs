@@ -24,13 +24,13 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
     /// </summary>
     public bool attemptConnectionOnStartup;
     /// <summary>
-    /// Set whether or not the program should be allowed to use wifi to connect to the board.
+    /// Which board type the reader should try to read from.
     ///
     /// Note: turning this on may add a significant amount of time to reconnection delay
     /// </summary>
-    /// <see cref="SetAllowWifi(bool)"/>
-    /// <see cref="GetAllowWifi"/>
-    public bool allowWifi;
+    /// <see cref="SetBoardType(bool)"/>
+    /// <see cref="GetBoardType"/>
+    public OpenBCIReaderI.BoardType boardType;
 
     /// <summary>
     /// The name of the wifi shield
@@ -38,6 +38,11 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
     /// </summary>
     private string wifiBoardName;
     
+    /// <summary>
+    /// Constant board id for synthetic connections
+    /// <see href="https://brainflow.readthedocs.io/en/stable/SupportedBoards.html#openbci"/>
+    /// </summary>
+    private const int SyntheticBoardID = -1;
     /// <summary>
     /// Constant board id for bluetooth Cyton connections
     /// <see href="https://brainflow.readthedocs.io/en/stable/SupportedBoards.html#openbci"/>
@@ -61,7 +66,7 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
     // /// <summary>
     // /// Variable that represents the current board connection
     // /// </summary>
-    // private BoardShim boardShim;
+    private BoardShim boardShim;
 
     /// <summary>
     /// Number of channels in the BCI device, usually determined by boardShim
@@ -159,10 +164,10 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
                 Debug.LogError("Board connection failed. Please wait for brainflow to close safely.");
                 connectionStatus = OpenBCIReaderI.ConnectionStatus.Disconnected;
                 Thread.Sleep(500);
-                // try { boardShim.stop_stream(); } 
-                // catch (BrainFlowException e) {Debug.LogError(e);}
-                // try { boardShim.release_session(); } 
-                // catch (BrainFlowException e) {Debug.LogError(e);}
+                try { boardShim.stop_stream(); } 
+                catch (Exception e) {Debug.LogError(e);}
+                try { boardShim.release_session(); } 
+                catch (Exception e) {Debug.LogError(e);}
                 Debug.Log("It is now safe to stop the game.");
                 break;
             }
@@ -180,29 +185,83 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
     {
         // enable debug info
         BoardShim.enable_dev_board_logger();
-        
-        if (verbose) Debug.Log("Attempting bluetooth connection...");
+        if (verbose) BoardShim.set_log_file("brainflow_log.txt");
 
-        if (serialPort == null)
+        switch (boardType)
         {
-            if (verbose) Debug.LogWarning("Warning: No serial port detected. Attempting to search for board...");
-            for (int i = 0; i < 10; i++)
-            {
-                if (AttemptConnectSerial("COM" + i))
+            case OpenBCIReaderI.BoardType.Synthetic:
+                connectionStatus = OpenBCIReaderI.ConnectionStatus.Connecting;
+
+                try
                 {
-                    serialPort = "COM" + i;
+                    if (verbose) Debug.Log("Attempting synthetic connection...");
+                    BrainFlowInputParams input_params = new BrainFlowInputParams();
+                    int boardId = (int) BoardIds.SYNTHETIC_BOARD;
+                    boardShim = new BoardShim(boardId, input_params);
+
+                    boardShim.prepare_session();
+                    boardShim.start_stream();
+                    
+                    connectionStatus = OpenBCIReaderI.ConnectionStatus.Connected;
+                    if (verbose) Debug.Log("Synthetic board connected.");
                     return true;
                 }
-            }
-        }
-        else
-        {
-            AttemptConnectSerial(serialPort);
-        }
+                catch (Exception e)
+                {
+                    switch (e.Message)
+                    {
+                        case "UNABLE_TO_OPEN_PORT_ERROR:2":
+                            if (verbose) Debug.LogWarning("Warning, board not available: UNABLE_TO_OPEN_PORT_ERROR:2");
+                            connectionStatus = OpenBCIReaderI.ConnectionStatus.Disconnected;
+                            return false;
+                        case "GENERAL_ERROR:17":
+                            if (verbose) Debug.LogWarning("Warning, board not available: GENERAL_ERROR:17");
+                            connectionStatus = OpenBCIReaderI.ConnectionStatus.Disconnected;
+                            return false;
+                        case "BOARD_WRITE_ERROR:4":
+                            if (verbose) Debug.LogWarning("Warning, board not available: BOARD_WRITE_ERROR:4");
+                            connectionStatus = OpenBCIReaderI.ConnectionStatus.Disconnected;
+                            return false;
+                        case "ANOTHER_BOARD_IS_CREATED_ERROR:16":
+                            Debug.LogWarning("Another process is using the synthetic board: ANOTHER_BOARD_IS_CREATED_ERROR:16\n" +
+                                             "You may need to restart Unity.");
+                            connectionStatus = OpenBCIReaderI.ConnectionStatus.Disconnected;
+                            return false;
+                        case "BOARD_NOT_READY_ERROR:7":
+                            Debug.LogWarning("Warning, board not ready on: BOARD_NOT_READY_ERROR:7\n" +
+                                             "Please try again.");
+                            connectionStatus = OpenBCIReaderI.ConnectionStatus.Disconnected;
+                            return false;
+                        default:
+                            Debug.Log("Unknown message: " + e.Message);
+                            throw;
+                    }
+                }
+            case OpenBCIReaderI.BoardType.BluetoothCyton:
+                if (verbose) Debug.Log("Attempting bluetooth connection...");
+        
+                if (serialPort != null)
+                {
+                    return AttemptConnectSerial(serialPort);
+                }
+                if (verbose) Debug.LogWarning("Warning: No serial port detected. Attempting to search for board...");
+                for (int i = 0; i < 10; i++)
+                {
+                    if (AttemptConnectSerial("COM" + i))
+                    {
+                        serialPort = "COM" + i;
+                        return true;
+                    }
+                }
 
-        if (connectionStatus != OpenBCIReaderI.ConnectionStatus.Disconnected) return true;
-        if (allowWifi) return AttemptConnectWifi(4000);
-        if (verbose) Debug.Log("Wifi not allowed.");
+                return false;
+            case OpenBCIReaderI.BoardType.WifiCyton:
+                return AttemptConnectWifi(4000);
+            default:
+                if (verbose) Debug.Log("Warning: Invalid board connection type '" + boardType + "'");
+                return false;
+        }
+        
         return false;
     }
 
@@ -218,7 +277,7 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
             Debug.Log("OpenBCI initialization complete on " + attemptSerialPort);
             return true;
         }
-        catch (BrainFlowException e)
+        catch (Exception e)
         {
             switch (e.Message)
             {
@@ -265,7 +324,7 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
             Debug.Log("OpenBCI initialization complete on wifi");
             return true;
         }
-        catch (BrainFlowException e)
+        catch (Exception e)
         {
             switch (e.Message)
             {
@@ -302,7 +361,7 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
 
             return rawData;
         }
-        catch (BrainFlowException e)
+        catch (Exception e)
         {
             if (e.Message.Equals("BOARD_NOT_CREATED_ERROR:15"))
             {
@@ -322,8 +381,8 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
     private void OnDestroy()
     {
         if (connectionStatus == OpenBCIReaderI.ConnectionStatus.Disconnected) return;
-        // boardShim.stop_stream();
-        // boardShim.release_session();
+        boardShim.stop_stream();
+        boardShim.release_session();
     }
 
     public OpenBCIReaderI.ConnectionStatus GetConnectionStatus()
@@ -345,15 +404,15 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
         }
     }
 
-    public void SetAllowWifi(bool allowWifi)
+    public void SetBoardType(OpenBCIReaderI.BoardType boardType)
     {
-        if (verbose) Debug.Log("Setting allowWifi to " + allowWifi);
-        this.allowWifi = allowWifi;
+        if (verbose) Debug.Log("Setting boardType to " + boardType);
+        this.boardType = boardType;
     }
 
-    public bool GetAllowWifi()
+    public OpenBCIReaderI.BoardType GetBoardType()
     {
-        return allowWifi;
+        return boardType;
     }
 
     public void SetWifiBoardName(string name)
@@ -454,6 +513,12 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
     public void Disconnect()
     {
         if (verbose) Debug.Log("Disconnecting");
+        if (boardShim != null && boardShim.is_prepared())
+        {
+            boardShim.stop_stream();
+            boardShim.release_session();
+        }
+        if (verbose) Debug.Log("Disconnected");
         connectionStatus = OpenBCIReaderI.ConnectionStatus.Disconnected;
     }
 

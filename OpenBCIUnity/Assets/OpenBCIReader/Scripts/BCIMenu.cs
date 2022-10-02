@@ -236,19 +236,19 @@ public class BCIMenu : MonoBehaviour, BCIMenuI
 
     public void Board_Type()
     {
-        if (boardType.value == 1 || boardType.value == 0)
+        switch (boardType.value)
         {
-            bciReader.SetAllowWifi(boardType.value == 1);
-            if (boardType.value == 1)
-            {
-                boardName.SetActive(true);
-            }
-            else
-            {
-                boardName.SetActive(false);
-            }
-            bciReader.Reconnect();
+            case 0:
+                bciReader.SetBoardType(OpenBCIReaderI.BoardType.Synthetic);
+                break;
+            case 1:
+                bciReader.SetBoardType(OpenBCIReaderI.BoardType.BluetoothCyton);
+                break;
+            case 2:
+                bciReader.SetBoardType(OpenBCIReaderI.BoardType.WifiCyton);
+                break;
         }
+        bciReader.Reconnect();
     }
 
     public void WifiBoardName()
