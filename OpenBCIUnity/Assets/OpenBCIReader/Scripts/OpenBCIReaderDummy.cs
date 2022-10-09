@@ -524,6 +524,8 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
             boardShim.stop_stream();
             boardShim.release_session();
         }
+        BoardShim.release_all_sessions();
+        
         if (verbose) Debug.Log("Disconnected");
         connectionStatus = OpenBCIReaderI.ConnectionStatus.Disconnected;
 
