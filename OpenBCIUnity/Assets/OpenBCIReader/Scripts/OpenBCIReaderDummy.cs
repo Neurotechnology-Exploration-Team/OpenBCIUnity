@@ -191,7 +191,18 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
     {
         // enable debug info
         BoardShim.enable_dev_board_logger();
-        if (verbose) BoardShim.set_log_file("Logs/brainflow_log.txt");
+        if (verbose)
+        {
+            try
+            {
+                BoardShim.set_log_file("Logs/brainflow_log.txt");
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("Create a \"Logs\" directory at the top level of your Unity project to see " +
+                               "the log file.");
+            }
+        }
 
         switch (boardType)
         {
@@ -515,6 +526,11 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
         }
         if (verbose) Debug.Log("Disconnected");
         connectionStatus = OpenBCIReaderI.ConnectionStatus.Disconnected;
+
+        for (int channel = 0; channel < numChannels; channel++)
+        {
+            nanovoltAverages[channel] = 0;
+        }
     }
 
     public void Reconnect()
