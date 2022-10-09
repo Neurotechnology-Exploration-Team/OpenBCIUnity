@@ -3782,6 +3782,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4365767843575565627}
     m_Modifications:
+    - target: {fileID: 1181406829975619783, guid: 7049b42e9e01d5e4cbc9b8119e359db5, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1181406830267637496, guid: 7049b42e9e01d5e4cbc9b8119e359db5, type: 3}
       propertyPath: bciMenuCanvas
       value: 
@@ -3931,6 +3935,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4365767843575565627}
     m_Modifications:
+    - target: {fileID: 1181406829975619783, guid: 7049b42e9e01d5e4cbc9b8119e359db5, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1181406830267637496, guid: 7049b42e9e01d5e4cbc9b8119e359db5, type: 3}
       propertyPath: bciMenuCanvas
       value: 
@@ -4080,6 +4088,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4365767843575565627}
     m_Modifications:
+    - target: {fileID: 1181406829975619783, guid: 7049b42e9e01d5e4cbc9b8119e359db5, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1181406830267637496, guid: 7049b42e9e01d5e4cbc9b8119e359db5, type: 3}
       propertyPath: bciMenuCanvas
       value: 
@@ -4229,6 +4241,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4365767843575565627}
     m_Modifications:
+    - target: {fileID: 1181406829975619783, guid: 7049b42e9e01d5e4cbc9b8119e359db5, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1181406830267637496, guid: 7049b42e9e01d5e4cbc9b8119e359db5, type: 3}
       propertyPath: bciMenuCanvas
       value: 

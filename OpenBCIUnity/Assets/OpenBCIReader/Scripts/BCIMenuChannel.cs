@@ -25,9 +25,10 @@ public class BCIMenuChannel : MonoBehaviour
         bciMenuI = bciMenuCanvas.GetComponent<BCIMenuI>();
     }
 
-    public void ResetAllSliders()
+    public void ResetSlider(int slider)
     {
-        bciMenuI.ResetThresholdSliders();
+        
+        bciMenuI.SetThresholdBar(slider);
     }
 
     public void SetAllKeybinds()
