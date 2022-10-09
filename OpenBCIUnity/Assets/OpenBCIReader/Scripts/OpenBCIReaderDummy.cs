@@ -113,6 +113,8 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
 
     public bool doLastNotAvg;
 
+    public String debugFile = "brainflow_log.txt";
+
     /// <summary>
     /// Called before the first frame update.
     /// Attempts to start the connection if attemptConnectionOnStartup
@@ -195,11 +197,11 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
         {
             try
             {
-                BoardShim.set_log_file("brainflow_log.txt");
+                BoardShim.set_log_file(debugFile);
             }
             catch (Exception e)
             {
-                Debug.LogError("Cannot open brainflow_log.txt; please delete this file to see new logs.");
+                Debug.LogError("Cannot open log file " + debugFile);
             }
         }
 

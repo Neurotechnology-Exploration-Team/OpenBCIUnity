@@ -583,6 +583,7 @@ MonoBehaviour:
   attemptConnectionOnStartup: 0
   boardType: 0
   doLastNotAvg: 1
+  debugFile: brainflow_log.txt
   flexedChannels: 0000000000000000
 --- !u!4 &1996671711
 Transform:
