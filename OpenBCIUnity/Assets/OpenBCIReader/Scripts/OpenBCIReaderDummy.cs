@@ -288,7 +288,7 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
         try
         {
             Thread.Sleep(100);
-            if (false) throw new Exception("UNABLE_TO_OPEN_PORT_ERROR:2");
+            throw new Exception("UNABLE_TO_OPEN_PORT_ERROR:2");
 
             Debug.Log("OpenBCI initialization complete on " + attemptSerialPort);
             return true;
@@ -333,7 +333,7 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
         
         try
         {
-            if (false) throw new Exception("BOARD_WRITE_ERROR:4");
+            throw new Exception("BOARD_WRITE_ERROR:4");
             
             Thread.Sleep(10_000);
 
@@ -542,9 +542,8 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
         Disconnect();
 
         AttemptConnect();
-        Debug.Log(connectionStatus == OpenBCIReaderI.ConnectionStatus.Disconnected
-            ? "No OpenBCI board connection could be made."
-            : "OpenBCI board connecting...");
+        if (connectionStatus == OpenBCIReaderI.ConnectionStatus.Disconnected)
+            Debug.LogWarning("No OpenBCI board connection could be made.");
     }
 
     /// <summary>
