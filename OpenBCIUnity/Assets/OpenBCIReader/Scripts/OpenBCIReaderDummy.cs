@@ -263,7 +263,7 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
                     return AttemptConnectSerial(serialPort);
                 }
                 if (verbose) Debug.LogWarning("Warning: No serial port detected. Attempting to search for board...");
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 50; i++)
                 {
                     if (AttemptConnectSerial("COM" + i))
                     {
