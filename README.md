@@ -52,6 +52,9 @@ Download the resources for this guide by clicking on the zip folder in the lates
    - Find the OpenBCIReader/brainflow folder
    - Delete everything from that folder
    - Follow Unity instructions from [this page](https://brainflow.readthedocs.io/en/stable/GameEngines.html) but place all files into the OpenBCIUnity/brainflow folder
+3. If you get the error: "OpenBCIReader\Scripts\OpenBCIReaderDummy.cs(9,17): error CS0234: The type or namespace name 'Ports' does not exist in the namespace 'System.IO' (are you missing an assembly reference?)"
+   - Go to Edit -> Project Settings... -> Player -> Other Settings -> Configuration
+   - Set Api Compatibility Level to .NET Framework (with no version suffix)
 
 ## 6. Creating required GameObjects
 

@@ -6,6 +6,7 @@ using System.Threading;
 using UnityEngine;
 using brainflow;
 using Random = System.Random;
+using System.IO.Ports;
 
 public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
 {
@@ -257,17 +258,21 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
                 }
             case OpenBCIReaderI.BoardType.BluetoothCyton:
                 if (verbose) Debug.Log("Attempting bluetooth connection...");
-        
+
                 if (serialPort != null)
                 {
-                    return AttemptConnectSerial(serialPort);
+                    bool connected = AttemptConnectSerial(serialPort);
+                    if (connected) return true;
+                    serialPort = null;
+                    return false;
                 }
+
                 if (verbose) Debug.LogWarning("Warning: No serial port detected. Attempting to search for board...");
-                for (int i = 0; i < 50; i++)
+                foreach (string s in SerialPort.GetPortNames())
                 {
-                    if (AttemptConnectSerial("COM" + i))
+                    if (AttemptConnectSerial(s))
                     {
-                        serialPort = "COM" + i;
+                        serialPort = s;
                         return true;
                     }
                 }
