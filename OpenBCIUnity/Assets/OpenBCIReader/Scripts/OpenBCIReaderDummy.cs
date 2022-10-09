@@ -292,14 +292,22 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
         
         try
         {
-            Thread.Sleep(100);
-            throw new Exception("UNABLE_TO_OPEN_PORT_ERROR:2");
+            if (verbose) Debug.Log("Attempting bluetooth cyton connection on " + attemptSerialPort + "...");
+            BrainFlowInputParams input_params = new BrainFlowInputParams();
+            input_params.serial_port = attemptSerialPort;
+            int boardId = (int) BoardIds.CYTON_BOARD;
+            boardShim = new BoardShim(boardId, input_params);
 
-            Debug.Log("OpenBCI initialization complete on " + attemptSerialPort);
+            boardShim.prepare_session();
+            boardShim.start_stream();
+                    
+            connectionStatus = OpenBCIReaderI.ConnectionStatus.Connected;
+            if (verbose) Debug.Log("Synthetic board connected.");
             return true;
         }
         catch (Exception e)
         {
+            BoardShim.release_all_sessions();
             switch (e.Message)
             {
                 case "UNABLE_TO_OPEN_PORT_ERROR:2":
@@ -338,15 +346,22 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
         
         try
         {
-            throw new Exception("BOARD_WRITE_ERROR:4");
-            
-            Thread.Sleep(10_000);
+            if (verbose) Debug.Log("Attempting wifi cyton connection on " + emptyPort + "...");
+            BrainFlowInputParams input_params = new BrainFlowInputParams();
+            input_params.ip_port = emptyPort;
+            int boardId = (int) BoardIds.CYTON_WIFI_BOARD;
+            boardShim = new BoardShim(boardId, input_params);
 
-            Debug.Log("OpenBCI initialization complete on wifi");
+            boardShim.prepare_session();
+            boardShim.start_stream();
+                    
+            connectionStatus = OpenBCIReaderI.ConnectionStatus.Connected;
+            if (verbose) Debug.Log("Wifi board connected.");
             return true;
         }
         catch (Exception e)
         {
+            BoardShim.release_all_sessions();
             switch (e.Message)
             {
                 case "BOARD_WRITE_ERROR:4":
