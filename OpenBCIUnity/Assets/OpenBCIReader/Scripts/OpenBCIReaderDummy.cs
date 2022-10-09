@@ -195,12 +195,11 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
         {
             try
             {
-                BoardShim.set_log_file("Logs/brainflow_log.txt");
+                BoardShim.set_log_file("brainflow_log.txt");
             }
             catch (Exception e)
             {
-                Debug.LogError("Create a \"Logs\" directory at the top level of your Unity project to see " +
-                               "the log file.");
+                Debug.LogError("Cannot open brainflow_log.txt; please delete this file to see new logs.");
             }
         }
 
