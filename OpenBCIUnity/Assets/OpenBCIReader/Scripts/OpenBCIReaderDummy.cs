@@ -199,7 +199,7 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
             {
                 BoardShim.set_log_file(debugFile);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Debug.LogError("Cannot open log file " + debugFile);
             }
