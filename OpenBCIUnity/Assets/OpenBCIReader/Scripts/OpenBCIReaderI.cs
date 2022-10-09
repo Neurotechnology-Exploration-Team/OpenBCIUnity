@@ -207,7 +207,7 @@ public interface OpenBCIReaderI
 
     /// <summary>
     /// Set whether or not the program prints every message with debug info or just important ones.
-    /// If true, program will print a lot of debug information
+    /// If true, program will print a lot of debug information, and save log files
     /// If false, program will print only critical info such as whether or not the board has connected
     /// </summary>
     /// <param name="verbose">Whether or not the program prints every message with debug info or just important ones.</param>
@@ -225,7 +225,7 @@ public interface OpenBCIReaderI
     public void SetVerbose(bool verbose);
     /// <summary>
     /// Get whether or not the program prints every message or just important ones.
-    /// If true, program will print a lot of debug information
+    /// If true, program will print a lot of debug information, and save log files
     /// If false, program will print only critical info such as whether or not the board has connected
     /// </summary>
     /// <returns>Whether or not the program prints every message with debug info or just important ones.</returns>
