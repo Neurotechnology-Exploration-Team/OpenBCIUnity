@@ -5,8 +5,8 @@ using System.Linq;
 using System.Threading;
 using UnityEngine;
 using brainflow;
-using Random = System.Random;
 using System.IO.Ports;
+using Random = UnityEngine.Random;
 
 public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
 {
@@ -279,7 +279,15 @@ public class OpenBCIReaderDummy : MonoBehaviour, OpenBCIReaderI
 
                 return false;
             case OpenBCIReaderI.BoardType.WifiCyton:
-                return AttemptConnectWifi(4000);
+                for (int att = 0; att < 10; att++)
+                {
+                    if (AttemptConnectWifi(Random.Range(4000, 5000)))
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
             default:
                 if (verbose) Debug.Log("Warning: Invalid board connection type '" + boardType + "'");
                 return false;
